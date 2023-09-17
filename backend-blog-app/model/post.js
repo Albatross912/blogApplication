@@ -1,5 +1,5 @@
 import fs from "fs";
-const PATH = "allPost. ";
+const PATH = "./model/allPost.json";
 
 class Post {
   get() {
