@@ -5,11 +5,15 @@ class Post {
   get() {
     return this.readData();
   }
-  getIndividualBlog(postId){
-    console.log(postId)
+  add(newPost) {
+    const data = this.readData();
+    data.unshift(newPost);
+    this.storeData(data);
+  }
+  getIndividualBlog(postId) {
     const posts = this.readData();
     const foundPost = posts.find((post) => post.id == postId);
-    return foundPost
+    return foundPost;
   }
   readData() {
     try {
@@ -17,6 +21,13 @@ class Post {
     } catch (err) {
       console.error(err);
       return false;
+    }
+  }
+  storeData(data) {
+    try {
+      fs.writeFileSync(PATH, JSON.stringify(data));
+    } catch (err) {
+      console.error(err);
     }
   }
 }
