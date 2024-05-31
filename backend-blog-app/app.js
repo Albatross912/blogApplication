@@ -4,9 +4,12 @@ import mongoose from 'mongoose';
 import multer from 'multer';
 import path from 'path';
 import Post from './model/post.js';
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 const app = express();
-const port = 3002;
+const port = process.env.PORT || 3000;
 const dbURL = "mongodb+srv://piyushsharma912912:BX97rD033KrsLYJw@cluster0.kcm5wfv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 // Connect to MongoDB
 mongoose.connect(dbURL, {
