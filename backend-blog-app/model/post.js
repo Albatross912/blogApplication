@@ -1,34 +1,25 @@
-import fs from "fs";
-const PATH = "./model/allPost.json";
+// models/post.js
+import mongoose from 'mongoose';
 
-class Post {
-  get() {
-    return this.readData();
+const postSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  post_image: {
+    type: String,
+    required: true,
+  },
+  added_date: {
+    type: Date,
+    default: Date.now,
   }
-  add(newPost) {
-    const data = this.readData();
-    data.unshift(newPost);
-    this.storeData(data);
-  }
-  getIndividualBlog(postId) {
-    const posts = this.readData();
-    const foundPost = posts.find((post) => post.id == postId);
-    return foundPost;
-  }
-  readData() {
-    try {
-      return JSON.parse(fs.readFileSync(PATH, "utf8"));
-    } catch (err) {
-      console.error(err);
-      return false;
-    }
-  }
-  storeData(data) {
-    try {
-      fs.writeFileSync(PATH, JSON.stringify(data));
-    } catch (err) {
-      console.error(err);
-    }
-  }
-}
+}, { timestamps: true });
+
+const Post = mongoose.model('Post', postSchema);
+
 export default Post;
